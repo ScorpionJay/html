@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>layout 1</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background-color: #eee;
+            height: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px #333 solid;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+            /* background-color: aquamarine; */
+            height: 90%;
+            width: 100%;
+        }
+
+        main>nav {
+            min-width: 10rem;
+            max-width: 20rem;
+            overflow: auto;
+            position: fixed;
+            /* background-color: red; */
+            height: 90%;
+            border-right: 1px #333 solid;
+            /* padding: 1rem; */
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        main .container {
+            /* overflow: auto;
+            height: 100%; */
+            margin-left: 12rem;
+            overflow: auto;
+            /* background-color: blueviolet; */
+            height: 100%;
+            width: 100%;
+        }
+
+        footer {
+            position: sticky;
+            bottom: 0;
+            background-color: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Header
+    </header>
+    <main>
+        <nav>
+            Nav
+            <ul>
+                <li>li 1</li>
+                <li>li 2</li>
+                <li>li 3</li>
+                <li>li 4</li>
+                <li>li 5</li>
+                <li>li 6</li>
+                <li>li 7</li>
+                <li>li 8</li>
+                <li>li 9</li>
+                <li>li 10</li>
+                <li>li 11</li>
+                <li>li 12</li>
+                <li>li 13</li>
+                <li>li 14</li>
+                <li>li 15</li>
+                <li>li 16</li>
+                <li>li 17</li>
+                <li>li 18</li>
+                <li>li 19</li>
+                <li>li 20</li>
+                <li>li 21</li>
+
+
+            </ul>
+        </nav>
+        <div class="container">
+            content
+            <div>con 1</div>
+            <div>con 2</div>
+            <div>con 3</div>
+            <div>con 4</div>
+            <div>con 5</div>
+            <div>con 6</div>
+            <div>con 7</div>
+            <div>con 8</div>
+            <div>con 9</div>
+            <div>con 10</div>
+            <div>con 11</div>
+            <div>con 12</div>
+
+        </div>
+    </main>
+    <!-- <footer>
+        footer
+    </footer> -->
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>line wipe</title>
+	<link rel="stylesheet" href="css/line_wipe.css" />
+</head>
+
+<body>
+	<div class="outer_box">
+		<div class="face"></div>
+		<!--这个div在后面-->
+		<div class="face"></div>
+		<!--这个div在前面-->
+		<div class="line"></div>
+	</div>
+</body>
+<script>
+	function lineWipe(imgs) {
+		var index = 0, nextIndex = index + 1;
+		var face = document.querySelectorAll('.face');
+		var line = document.querySelectorAll('.line')[0];
+		face[0].style.backgroundImage = 'url(img/sample' + imgs[1] + '.jpg)';
+		face[1].style.backgroundImage = 'url(img/sample' + imgs[0] + '.jpg)';
+
+		setInterval(function () {
+			face[1].classList.add('show');	/*给前面的div添加蒙版，实现动画效果*/
+			line.classList.add('show')
+		}, 300);
+
+		face[1].addEventListener('webkitTransitionEnd', function () {
+			index = nextIndex;
+			if (index == imgs.length - 1)
+				nextIndex = 0;		//最后一张图片与第一张图片的切换
+			else
+				nextIndex = index + 1;
+			face[0].style.backgroundImage = 'url(img/sample' + imgs[nextIndex] + '.jpg)';
+			face[1].style.backgroundImage = 'url(img/sample' + imgs[index] + '.jpg)';
+			face[1].classList.remove('show');
+			line.classList.remove('show')
+
+		})
+	}
+
+	lineWipe([2, 3, 4])
+</script>
+
+</html>

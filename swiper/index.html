@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo</title>
+    <link href="style.css" type="text/css" rel='stylesheet'>
+    <link href="https://cdn.bootcss.com/Swiper/4.0.7/css/swiper.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/Swiper/4.0.7/js/swiper.min.js"></script>
+</head>
+
+<body>
+
+    <audio src="https://qnvideo.hunliji.com/n-LvZJP0teoKD9I40PDyXmbhuJQ=/FjAn5yfNzoY8hRZ0fBwnM18uRBFT.mp3" class="media-audio"
+        autoplay preload loop="loop"></audio>
+
+    <div id='music'>
+    </div>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide page1">Slide 1
+            </div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+            <div class="swiper-slide">Slide 8</div>
+            <div class="swiper-slide">Slide 9</div>
+            <div class="swiper-slide">Slide 10</div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <span class="start">
+            <b></b>
+        </span>
+    </div>
+</body>
+
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        direction: 'vertical',
+        touchRatio: 0.5,//触摸变慢
+        navigation: {
+            nextEl: '.start',
+        },
+        // loop:true,
+        // pagination: {
+        //     el: '.swiper-pagination',
+        //     clickable: true,
+        // },
+        on: {
+            slideChange: function () {
+                if (this.isEnd) {
+                    this.navigation.$nextEl.css('display', 'none');
+                } else {
+                    this.navigation.$nextEl.css('display', 'block');
+                }
+            },
+        },
+
+    });
+
+</script>
+
+</html>

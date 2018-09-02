@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.outer_box {
+  width: 200px;
+  height: 100px;
+  position: relative;
+  left: 200px;
+  top: 150px;
+  /*-webkit-animation: mask_move 5s linear 1s forwards;*/ /*也可使用transition实现动画效果*/
+}
+.face {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  background-size: cover;
+}
+.face:nth-child(1) {
+  background-repeat: no-repeat;
+}
+.face:nth-child(2) {
+  background-repeat: no-repeat;
+  -webkit-mask-image: -webkit-linear-gradient(
+    left top,
+    transparent 50%,
+    #000 50%
+  );
+  -webkit-mask-size: 490px 100px;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: -290px 0px;
+}
+.face.show {
+  -webkit-transition: -webkit-mask-position 3s linear 0s; /*实现mask移动动画，从而达到line wipe动画效果*/
+  -webkit-mask-position: 200px 0px;
+}
+.line {
+  width: 10px;
+  height: 102px;
+  background: #fff;
+  transform: skew(-13deg);
+  left: -50px;
+  position: absolute;
+}
+.line.show {
+  animation: mymove 3s linear 0s;
+}
+@keyframes mymove {
+  from {
+    left: -50px;
+  }
+  to {
+    left: 440px;
+  }
+}

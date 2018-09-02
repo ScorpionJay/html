@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>drag</title>
+	<style>
+		.container {
+			width: 600px;
+			height: 600px;
+			background: #eee;
+			margin: 100px auto;
+			/* position: relative; */
+		}
+
+		#drag {
+			width: 60px;
+			height: 60px;
+			background: #333;
+			position: absolute;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<a id="drag">拖我啊</a>
+	</div>
+</body>
+<script>
+	//拖拽中
+
+	var container = document.getElementsByClassName('container')[0];
+	console.log(container.offsetTop, container.offsetLeft)
+	console.log('高度', container.offsetHeight)
+	console.log('宽度', container.offsetWidth)
+
+	var dragBox = document.getElementById('drag');
+	console.log('高度', dragBox.offsetHeight)
+	console.log('宽度', dragBox.offsetWidth)
+
+	var x1 = container.offsetLeft
+	var x2 = container.offsetLeft + container.offsetWidth - dragBox.offsetWidth
+	var y1 = container.offsetTop
+	var y2 = container.offsetTop + container.offsetHeight - dragBox.offsetHeight
+
+	dragBox.addEventListener('touchmove', function (event) {
+		event.preventDefault();//阻止其他事件
+
+		// 如果这个元素的位置内只有一个手指的话
+		if (event.targetTouches.length == 1) {
+			var touch = event.targetTouches[0];
+			// 元素与手指位置同步
+			// y
+			if (touch.clientY < y1) {
+				dragBox.style.top = y1
+			} else if (touch.clientY > y2) {
+				dragBox.style.top = y2
+			} else {
+				dragBox.style.top = touch.clientY + 'px';
+			}
+
+			// x
+			if (touch.clientX < x1) {
+				dragBox.style.left = x1
+			} else if (touch.clientX > x2) {
+				dragBox.style.left = x2
+			} else {
+				dragBox.style.left = touch.clientX + 'px';
+
+			}
+		}
+	}, false);
+
+	dragBox.addEventListener('touchend', function (event) {
+		event.preventDefault();//阻止其他事件
+		// 计算靠边
+		// if (event.targetTouches.length == 1) {
+		// 	var touch = event.targetTouches[0];
+
+		var d1 = dragBox.offsetLeft - x1
+		var d2 = x2 - dragBox.offsetLeft
+
+		dragBox.style.left = (d1 < d2 ? x1 : x2) + 'px'
+
+		// dragBox.style.left = 100 + 'px';
+		// dragBox.style.top = 100 + 'px';
+		// }
+
+	}, false);
+	//拖拽结束，放手
+	// dragBox.addEventListener('mouseup', function (event) {
+	// 	console.log(123)
+	// 	// 如果这个元素的位置内只有一个手指的话
+	// 	//拖拽结束，changedTouches列表是涉及当前事件的列表
+	// 	// if (event.changedTouches.length == 1) {
+	// 	// 	var touch = event.changedTouches[0];
+	// 	// 	// 判断手指位置，放置元素，如果大于浏览器宽度的一半，则右贴边，小于等于则左贴边
+	// 	// 	var halfViewWidth = window.innerWidth / 2;
+	// 	// 	var halfWidth = $(dragBox).width() / 2;
+	// 	// 	// 手指位置判断,竖直方向，超出屏幕的贴边，水平方向，超出屏幕贴边，
+	// 	// 	//左边左贴边，右边右贴边
+	// 	// 	if ((touch.clientX < 0) || (touch.clientX >= 0 && touch.clientX <= (halfViewWidth - halfWidth))) {
+	// 	// 		dragBox.style.left = 20 + 'px';
+	// 	// 	} else if (touch.clientX >= (halfViewWidth - halfWidth)) {
+	// 	// 		dragBox.style.left = (window.innerWidth - 20 - $(dragBox).width()) + 'px';
+	// 	// 	}
+	// 	// 	if (touch.clientY < 0) {
+	// 	// 		dragBox.style.top = 20 + 'px';
+	// 	// 	} else if (touch.clientY >= window.innerHeight - $(dragBox).height()) {
+	// 	// 		dragBox.style.top = (window.innerHeight - $(dragBox).height() - 20) + 'px';
+	// 	// 	}
+	// 	// }
+	// 	// dragBox.touchmove = null;
+	// 	// dragBox.touchend = null;
+	// 	//setCookie('xPosition',oDiv.offsetLeft,1);
+	// 	//setCookie('yPosition',oDiv.offsetTop,1);
+	// }, false);
+
+	// dragBox.addEventListener('mousemove',(e)=>{
+	// 	// console.log(e)
+	// 	dragBox.style.left = (e.clientX - dragBox.offsetWidth/2) + 'px';
+	// 	dragBox.style.top =(e.clientY - dragBox.offsetHeight/2) + 'px';
+	// })
+
+	// dragBox.addEventListener('mouseup', function (event) {
+	// 	// console.log(123)
+	// 	dragBox.style.left = (e.clientX - dragBox.offsetWidth/2) + 'px';
+	// 	dragBox.style.top =(e.clientY - dragBox.offsetHeight/2) + 'px';
+	// 	event.preventDefault();//阻止其他事件
+
+	// 	// 如果这个元素的位置内只有一个手指的话
+	// 	// if (event.targetTouches.length == 1) {
+	// 	// 	var touch = event.targetTouches[0];
+	// 	// 	// 元素与手指位置同步
+	// 	// 	dragBox.style.left = touch.clientX + 'px';
+	// 	// 	dragBox.style.top = touch.clientY + 'px';
+	// 	// 	//由于页面中会有滚动，所以在这不能用pageX和pageY,要用clientX  clientY
+
+	// 	// }
+	// }, false);
+	//拖拽结束，放手
+	// dragBox.addEventListener('mouseup', function (event) {
+	// 	console.log(123)
+	// 	// 如果这个元素的位置内只有一个手指的话
+	// 	//拖拽结束，changedTouches列表是涉及当前事件的列表
+	// 	if (event.changedTouches.length == 1) {
+	// 		var touch = event.changedTouches[0];
+	// 		// 判断手指位置，放置元素，如果大于浏览器宽度的一半，则右贴边，小于等于则左贴边
+	// 		var halfViewWidth = window.innerWidth / 2;
+	// 		var halfWidth = $(dragBox).width() / 2;
+	// 		// 手指位置判断,竖直方向，超出屏幕的贴边，水平方向，超出屏幕贴边，
+	// 		//左边左贴边，右边右贴边
+	// 		if ((touch.clientX < 0) || (touch.clientX >= 0 && touch.clientX <= (halfViewWidth - halfWidth))) {
+	// 			dragBox.style.left = 20 + 'px';
+	// 		} else if (touch.clientX >= (halfViewWidth - halfWidth)) {
+	// 			dragBox.style.left = (window.innerWidth - 20 - $(dragBox).width()) + 'px';
+	// 		}
+	// 		if (touch.clientY < 0) {
+	// 			dragBox.style.top = 20 + 'px';
+	// 		} else if (touch.clientY >= window.innerHeight - $(dragBox).height()) {
+	// 			dragBox.style.top = (window.innerHeight - $(dragBox).height() - 20) + 'px';
+	// 		}
+	// 	}
+	// 	dragBox.touchmove = null;
+	// 	dragBox.touchend = null;
+	// 	//setCookie('xPosition',oDiv.offsetLeft,1);
+	// 	//setCookie('yPosition',oDiv.offsetTop,1);
+	// }, false);
+	dragBox.addEventListener('click', () => {
+		console.log(123)
+
+	})
+
+</script>
+
+</html>
