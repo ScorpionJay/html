@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es6</title>
+    <style>
+        #input{
+            width: 49%;
+            min-height: 300px;
+        }
+        #output{
+            float: right;
+            width: 50%;
+            border: 1px solid #999;
+            min-height: 300px;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="input" placeholder="plz input your code"></textarea>
+    <pre id="output"></pre>
+</body>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel">
+    let input = document.getElementById('input'),
+        output = document.getElementById('output');
+    input.addEventListener('keyup',e=>{
+        let code = e.target.value;
+        let out = Babel.transform(code, { presets: ['es2015'] }).code;
+        output.innerHTML = out;
+    })
+</script>
+
+</html>
