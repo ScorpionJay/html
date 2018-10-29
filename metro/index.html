@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Metro</title>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?type=subway&v=1.0&ak=ByAGHw3EmPZwGdDla0skykX9uSxthgCN"></script>
+    <style type="text/css">
+        select {
+            width: 8rem;
+            height: 3rem;
+            font-size: 1.5rem;
+            margin-left: 3rem;
+            margin-top: 2rem;
+            position: absolute;
+            z-index: 1;
+        }
+
+        #container {
+            height: 100%
+        }
+    </style>
+</head>
+
+<body>
+    <select></select>
+    <div id="container"></div>
+    <script>
+        const defaultCity = '上海';
+        const select = document.getElementsByTagName('select')[0];
+        const cities = BMapSub.SubwayCitiesList;
+        select.innerHTML = cities.reduce((add, item) => add + `<option value='${item.citycode}'>${item.name}</otpion>`, '');
+        const defaultCode = cities.find(item => item.name === defaultCity).citycode;
+        select.value = defaultCode;
+        const subway = new BMapSub.Subway('container', defaultCode);
+        const zoomControl = new BMapSub.ZoomControl({
+            anchor: BMAPSUB_ANCHOR_BOTTOM_RIGHT,
+            offset: new BMapSub.Size(10, 100)
+        });
+        subway.addControl(zoomControl);
+        subway.setZoom(0.5);
+
+        subway.addEventListener('subwayloaded', () =>
+            document.querySelector("#container div a").remove()
+        );
+
+        subway.addEventListener('tap', e => {
+            const detail = new BMapSub.DetailInfo(subway);
+            detail.search(e.station.name);
+        })
+
+        select.addEventListener('change', e => {
+            subway.setCity(e.target.value)
+        })
+    </script>
+</body>
+
+</html>
